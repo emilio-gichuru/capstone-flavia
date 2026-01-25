@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Flavia Gazette - Portfolio Edition</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'paper': '#f5f1e8',
+                        'paper-light': '#faf6ed',
+                        'paper-dark': '#e8e0d0',
+                        'ink': '#1a1a1a',
+                        'ink-light': '#2c2c2c',
+                        'sepia': '#d4c5a9',
+                        'sepia-dark': '#8b7355',
+                    },
+                    fontFamily: {
+                        'blackletter': ['UnifrakturMaguntia', 'serif'],
+                        'headline': ['Playfair Display', 'serif'],
+                        'body': ['Libre Baskerville', 'serif'],
+                        'accent': ['Cormorant Garamond', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Paper texture background */
+        body {
+            background-color: #f5f1e8;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-blend-mode: multiply;
+        }
+        
+        /* Drop cap styling */
+        .drop-cap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-right: 0.5rem;
+            padding-top: 0.25rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        
+        /* Justified text */
+        .justified {
+            text-align: justify;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+        }
+        
+        /* Vintage border ornament */
+        .ornament {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 L20 10 M25 5 L30 10 L25 15 M35 10 L65 10 M70 5 L75 10 L70 15 M80 10 L100 10' stroke='%231a1a1a' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 20px;
+        }
+        
+        /* Column divider */
+        .column-rule {
+            border-right: 1px solid #2c2c2c;
+        }
+        
+        /* Stamp button effect */
+        .stamp-btn {
+            position: relative;
+            transition: all 0.15s ease;
+        }
+        
+        .stamp-btn:hover {
+            transform: scale(0.95);
+        }
+        
+        .stamp-btn:active {
+            transform: scale(0.9);
+        }
+        
+        /* Coffee stain overlay */
+        .coffee-stain {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse at center, 
+                transparent 0%, 
+                transparent 40%, 
+                rgba(139, 90, 43, 0.08) 50%, 
+                rgba(139, 90, 43, 0.05) 60%, 
+                transparent 70%);
+            pointer-events: none;
+        }
+        
+        /* Fold mark */
+        .fold-mark {
+            position: fixed;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(0,0,0,0.03) 20%, 
+                rgba(0,0,0,0.05) 50%, 
+                rgba(0,0,0,0.03) 80%, 
+                transparent 100%);
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        /* Ticker animation */
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .ticker-content {
+            animation: ticker 35s linear infinite;
+        }
+        
+        /* Small caps */
+        .small-caps {
+            font-variant: small-caps;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Decorative flourish */
+        .flourish::before,
+        .flourish::after {
+            content: '❧';
+            padding: 0 1rem;
+            color: #8b7355;
+        }
+        
+        /* Print styling for page breaks */
+        @media print {
+            .page-break {
+                page-break-before: always;
+            }
+        }
+        
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Article hover effect */
+        .article-card {
+            transition: all 0.3s ease;
+        }
+        
+        .article-card:hover {
+            background-color: #faf6ed;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+        }
+        
+        /* Vintage ad border */
+        .vintage-ad {
+            border: 3px double #1a1a1a;
+            position: relative;
+        }
+        
+        .vintage-ad::before {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border: 1px solid #2c2c2c;
+        }
+        
+        /* Interest card hover */
+        .interest-card {
+            transition: all 0.3s ease;
+        }
+        
+        .interest-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="font-body text-ink leading-relaxed">
+    <!-- Fold mark overlay -->
+    <div class="fold-mark" style="top: 50vh;"></div>
+    
+    <!-- Coffee stain decoration -->
+    <div class="coffee-stain" style="top: 200px; right: 10%;"></div>
+    <div class="coffee-stain" style="top: 60%; left: 5%; transform: rotate(45deg);"></div>
+    
+    <!-- Main Container -->
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- MASTHEAD -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <header class="text-center border-b-4 border-double border-ink pb-4 mb-6">
+            <!-- Top info bar -->
+            <div class="flex justify-between items-center text-xs font-accent mb-2 border-b border-ink pb-2">
+                <span class="small-caps">Vol. I, No. 1</span>
+                <span class="small-caps tracking-widest">★ Portfolio Edition ★</span>
+                <span id="current-date" class="small-caps"></span>
+            </div>
+            
+            <!-- Main title -->
+            <h1 class="font-blackletter text-5xl md:text-8xl tracking-wide my-4">
+                The Flavia Gazette
+            </h1>
+            
+            <!-- Subtitle bar -->
+            <div class="flex flex-wrap justify-center items-center gap-2 md:gap-4 text-sm font-accent border-t border-b border-ink py-2">
+                <span class="small-caps">Est. 2026</span>
+                <span class="text-sepia-dark hidden md:inline">◆</span>
+                <span class="small-caps">"Dispatches from a Curious Mind"</span>
+                <span class="text-sepia-dark hidden md:inline">◆</span>
+                <span class="small-caps">Nairobi, Kenya</span>
+            </div>
+            
+            <!-- Weather/Status ticker -->
+            <div class="bg-ink text-paper-light py-1 mt-4 overflow-hidden">
+                <div class="ticker-content inline-block whitespace-nowrap">
+                    <span class="px-8">🎻 NOW PRACTICING: Violin Studies</span>
+                    <span class="px-8">📚 CURRENTLY READING: The Glass Bees by Ernst Jünger</span>
+                    <span class="px-8">🌍 COUNTRIES VISITED: 9 and counting</span>
+                    <span class="px-8">💎 LATEST CRAFT: Metalwork Jewelry</span>
+                    <span class="px-8">🎬 FILM OF THE MOMENT: P.T. Anderson Marathon</span>
+                    <span class="px-8">🎻 NOW PRACTICING: Violin Studies</span>
+                    <span class="px-8">📚 CURRENTLY READING: The Glass Bees by Ernst Jünger</span>
+                    <span class="px-8">🌍 COUNTRIES VISITED: 9 and counting</span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- FRONT PAGE - HERO SECTION -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section class="mb-8">
+            <!-- EXTRA banner -->
+            <div class="text-center mb-4">
+                <span class="inline-block bg-ink text-paper px-6 py-1 font-headline text-xl tracking-widest transform -rotate-1">
+                    ★ SPECIAL EDITION ★
+                </span>
+            </div>
+            
+            <!-- Main headline -->
+            <h2 class="font-headline text-4xl md:text-7xl font-black text-center leading-tight mb-4">
+                AMANDA FLAVIA AHONA<br>
+                <span class="text-3xl md:text-5xl font-bold italic">Renaissance Student Makes Her Mark</span>
+            </h2>
+            
+            <!-- Subheadline -->
+            <p class="text-center font-accent text-xl md:text-2xl italic mb-4">
+                DeKUT Scholar Combines Technology with Artistry in Remarkable Fashion
+            </p>
+            
+            <!-- Byline -->
+            <p class="text-center text-sm small-caps text-ink-light mb-6">
+                By Our Nairobi Correspondent &bull; Special to The Flavia Gazette
+            </p>
+            
+            <div class="ornament mb-6"></div>
+        </section>
+        
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- FEATURED STORY - ABOUT SECTION -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section class="mb-8 border-b-2 border-ink pb-8">
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Main article column -->
+                <div class="md:col-span-2 md:column-rule md:pr-6">
+                    <h3 class="font-headline text-3xl font-bold mb-2 border-b border-ink pb-2">
+                        Portrait of a Modern Polymath
+                    </h3>
+                    <p class="text-xs small-caps text-ink-light mb-4">Featured Profile</p>
+                    
+                    <p class="drop-cap justified mb-4">
+                        <strong class="font-headline text-lg">NAIROBI</strong> — In the bustling heart of Kenya's capital, a young woman defies the notion that one must choose between art and science, between tradition and innovation. Amanda Flavia Ahona, known to friends and colleagues simply as Flavia, has carved out a remarkable path that weaves together technology, craftsmanship, and an insatiable curiosity about the world.
+                    </p>
+                    
+                    <p class="justified mb-4">
+                        Currently pursuing her studies at Dedan Kimathi University of Technology (DeKUT), Flavia represents a new generation of students who refuse to be defined by a single discipline. Her days are as likely to involve debugging code as they are shaping metal into intricate jewelry pieces—a duality she embraces with characteristic enthusiasm.
+                    </p>
+                    
+                    <p class="justified mb-4">
+                        "I've never understood why people think you have to choose," Miss Ahona remarked in a recent interview, her violin case resting nearby. "The same precision required in programming is what makes a good jeweler. The same patience needed for Russian literature is what helps you master a musical instrument."
+                    </p>
+                    
+                    <!-- Pull quote -->
+                    <blockquote class="border-l-4 border-ink pl-4 my-6 italic font-accent text-xl">
+                        "The world is too interesting to limit yourself to just one corner of it."
+                    </blockquote>
+                    
+                    <p class="justified">
+                        With nine countries already stamped in her passport and countless more on her list, Flavia approaches life with the same methodical wonder that characterizes her academic pursuits. Her reading list ranges from Ernst Jünger's "The Glass Bees" to the depths of Russian literature, while her film appreciation centers on the masterful works of Paul Thomas Anderson.
+                    </p>
+                    
+                    <p class="text-xs italic text-right mt-4 text-ink-light">
+                        — Continued in Skills & Interests Section
+                    </p>
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="space-y-6">
+                    <!-- Quick facts box -->
+                    <div class="border-2 border-ink p-4">
+                        <h4 class="font-headline text-lg font-bold text-center border-b border-ink pb-2 mb-3">
+                            AT A GLANCE
+                        </h4>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-start gap-2">
+                                <span class="text-sepia-dark">▸</span>
+                                <span><strong>Name:</strong> Amanda Flavia Ahona</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-sepia-dark">▸</span>
+                                <span><strong>Known As:</strong> Flavia</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-sepia-dark">▸</span>
+                                <span><strong>Location:</strong> Nairobi, Kenya</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-sepia-dark">▸</span>
+                                <span><strong>University:</strong> DeKUT</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-sepia-dark">▸</span>
+                                <span><strong>Countries Visited:</strong> 9</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Mini ad -->
+                    <div class="vintage-ad p-4 text-center">
+                        <p class="font-headline text-sm font-bold mb-1">STUDENT OF</p>
+                        <p class="font-blackletter text-2xl">Life & Code</p>
+                        <p class="text-xs mt-2 italic">Perpetually curious, endlessly learning</p>
+                    </div>
+                    
+                    <!-- Currently reading -->
+                    <div class="border border-ink p-3 bg-paper-dark">
+                        <p class="text-xs small-caps text-center mb-2">On Her Nightstand</p>
+                        <p class="font-headline text-center font-bold">"The Glass Bees"</p>
+                        <p class="text-xs text-center italic">by Ernst Jünger</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- SKILLS & INTERESTS SECTION -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section class="mb-8 border-b-2 border-ink pb-8">
+            <div class="text-center mb-6">
+                <span class="small-caps text-sm tracking-widest">Section B</span>
+                <h3 class="font-headline text-4xl font-bold">Skills & Pursuits</h3>
+                <p class="font-accent italic text-lg mt-1">A Chronicle of Talents and Passions</p>
+                <div class="ornament mt-2"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Craft & Art -->
+                <div class="interest-card border border-ink p-4">
+                    <div class="text-center mb-3">
+                        <span class="text-4xl">💎</span>
+                        <h4 class="font-headline text-xl font-bold mt-2">Jewelry & Metalwork</h4>
+                    </div>
+                    <p class="text-sm justified">
+                        With skilled hands and an artist's eye, Flavia transforms raw metal into wearable art. Her jewelry pieces blend traditional metalworking techniques with contemporary design, creating accessories that tell stories.
+                    </p>
+                    <p class="text-xs text-center mt-3 small-caps text-sepia-dark">Artisan • Craftsperson</p>
+                </div>
+                
+                <!-- Music -->
+                <div class="interest-card border border-ink p-4">
+                    <div class="text-center mb-3">
+                        <span class="text-4xl">🎻</span>
+                        <h4 class="font-headline text-xl font-bold mt-2">Violin</h4>
+                    </div>
+                    <p class="text-sm justified">
+                        The violin's voice speaks through her dedication to practice and performance. Whether playing classical pieces or exploring new musical territories, the instrument remains a constant companion in her creative journey.
+                    </p>
+                    <p class="text-xs text-center mt-3 small-caps text-sepia-dark">Musician • Performer</p>
+                </div>
+                
+                <!-- Literature -->
+                <div class="interest-card border border-ink p-4">
+                    <div class="text-center mb-3">
+                        <span class="text-4xl">📚</span>
+                        <h4 class="font-headline text-xl font-bold mt-2">Literature</h4>
+                    </div>
+                    <p class="text-sm justified">
+                        A voracious reader with a particular fondness for Russian literature, Flavia finds wisdom in the pages of classic and contemporary works alike. Currently absorbed in Ernst Jünger's "The Glass Bees."
+                    </p>
+                    <p class="text-xs text-center mt-3 small-caps text-sepia-dark">Bibliophile • Scholar</p>
+                </div>
+                
+                <!-- Film -->
+                <div class="interest-card border border-ink p-4">
+                    <div class="text-center mb-3">
+                        <span class="text-4xl">🎬</span>
+                        <h4 class="font-headline text-xl font-bold mt-2">Cinema & Photography</h4>
+                    </div>
+                    <p class="text-sm justified">
+                        A devoted admirer of Paul Thomas Anderson's filmography, Flavia appreciates the art of visual storytelling. Her interest extends to photography, capturing moments with the same attention to composition and light.
+                    </p>
+                    <p class="text-xs text-center mt-3 small-caps text-sepia-dark">Cinephile • Visual Artist</p>
+                </div>
+                
+                <!-- Travel -->
+                <div class="interest-card border border-ink p-4">
+                    <div class="text-center mb-3">
+                        <span class="text-4xl">🌍</span>
+                        <h4 class="font-headline text-xl font-bold mt-2">World Travel</h4>
+                    </div>
+                    <p class="text-sm justified">
+                        Nine countries and counting mark her passport—each journey an education in culture, history, and human connection. The world remains her classroom, and every destination offers new lessons.
+                    </p>
+                    <p class="text-xs text-center mt-3 small-caps text-sepia-dark">Explorer • Wanderer</p>
+                </div>
+                
+                <!-- Shooting -->
+                <div class="interest-card border border-ink p-4">
+                    <div class="text-center mb-3">
+                        <span class="text-4xl">🎯</span>
+                        <h4 class="font-headline text-xl font-bold mt-2">Shooting Sports</h4>
+                    </div>
+                    <p class="text-sm justified">
+                        Precision, focus, and steady nerves define her approach to shooting sports. This discipline requires the same concentration and patience that Flavia brings to all her endeavors.
+                    </p>
+                    <p class="text-xs text-center mt-3 small-caps text-sepia-dark">Marksman • Athlete</p>
+                </div>
+            </div>
+            
+            <!-- Featured reading section -->
+            <div class="mt-8 border-t border-ink pt-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="border border-ink p-4 bg-paper-light">
+                        <h4 class="font-headline text-lg font-bold mb-2 text-center">
+                            LITERARY GAZETTE: Reader's Corner
+                        </h4>
+                        <div class="flex gap-4 items-start">
+                            <div class="text-4xl">📖</div>
+                            <div>
+                                <p class="font-headline font-bold">Favorite Genre: Russian Literature</p>
+                                <p class="text-sm mt-1 italic">
+                                    "There's something about Russian authors—the way they explore the depths of human nature, the philosophical weight of every sentence. Dostoevsky, Tolstoy, Bulgakov... they understood something profound about existence."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-ink p-4 bg-paper-light">
+                        <h4 class="font-headline text-lg font-bold mb-2 text-center">
+                            CINEMA REVIEW: Director Spotlight
+                        </h4>
+                        <div class="flex gap-4 items-start">
+                            <div class="text-4xl">🎥</div>
+                            <div>
+                                <p class="font-headline font-bold">Paul Thomas Anderson</p>
+                                <p class="text-sm mt-1 italic">
+                                    "From 'There Will Be Blood' to 'Phantom Thread,' Anderson's films are masterclasses in storytelling. Every frame is intentional, every performance profound. Cinema at its finest."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- PROJECT GALLERY - FEATURED ARTICLES -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section class="mb-8 border-b-2 border-ink pb-8">
+            <div class="text-center mb-6">
+                <span class="small-caps text-sm tracking-widest">Section C</span>
+                <h3 class="font-headline text-4xl font-bold">Featured Works</h3>
+                <p class="font-accent italic text-lg mt-1">Notable Projects & Achievements</p>
+                <div class="ornament mt-2"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Capstone Project -->
+                <article class="article-card border-2 border-ink p-4 md:col-span-2">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-sepia/30 h-48 flex items-center justify-center border border-ink">
+                            <div class="text-center">
+                                <span class="font-headline text-5xl">🎓</span>
+                                <p class="text-xs mt-2 italic">Fig. 1: Capstone Project</p>
+                            </div>
+                        </div>
+                        <div class="md:col-span-2">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-ink text-paper text-xs px-2 py-1 small-caps">Featured Story</span>
+                            </div>
+                            <h4 class="font-headline text-2xl font-bold mb-2">
+                                University Capstone Project Demonstrates Technical Excellence
+                            </h4>
+                            <p class="text-xs small-caps text-ink-light mb-2">
+                                DeKUT • Academic Project • 2026
+                            </p>
+                            <p class="text-sm justified mb-3">
+                                The culmination of years of study, this capstone project represents the synthesis of technical knowledge, creative problem-solving, and practical application. Developed under the guidance of DeKUT faculty, the project showcases proficiency in modern development practices and innovative thinking.
+                            </p>
+                            <p class="text-sm justified">
+                                This work demonstrates not only technical competence but also the ability to see a complex project through from conception to completion—a skill that will serve well in any professional endeavor.
+                            </p>
+                            <div class="flex justify-between items-center text-xs mt-4">
+                                <a href="#" class="underline hover:no-underline">View Full Project →</a>
+                                <span class="italic text-ink-light">Completed 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Creative Works -->
+                <article class="article-card border border-ink p-4">
+                    <div class="bg-sepia/30 h-40 mb-4 flex items-center justify-center border border-ink">
+                        <div class="text-center">
+                            <span class="font-headline text-4xl">💍</span>
+                            <p class="text-xs mt-2 italic">Fig. 2: Jewelry Collection</p>
+                        </div>
+                    </div>
+                    <h4 class="font-headline text-xl font-bold mb-2">
+                        Handcrafted Jewelry Collection Gains Recognition
+                    </h4>
+                    <p class="text-xs small-caps text-ink-light mb-2">
+                        Metalwork • Artisan Craft
+                    </p>
+                    <p class="text-sm justified mb-3">
+                        A growing collection of handcrafted metalwork jewelry pieces, each created with meticulous attention to detail. From delicate rings to statement necklaces, these works combine traditional techniques with contemporary aesthetics.
+                    </p>
+                    <div class="text-xs text-right italic text-ink-light">
+                        Ongoing Collection
+                    </div>
+                </article>
+                
+                <!-- Photography -->
+                <article class="article-card border border-ink p-4">
+                    <div class="bg-sepia/30 h-40 mb-4 flex items-center justify-center border border-ink">
+                        <div class="text-center">
+                            <span class="font-headline text-4xl">📷</span>
+                            <p class="text-xs mt-2 italic">Fig. 3: Photo Essay</p>
+                        </div>
+                    </div>
+                    <h4 class="font-headline text-xl font-bold mb-2">
+                        Travel Photography Documents Global Journeys
+                    </h4>
+                    <p class="text-xs small-caps text-ink-light mb-2">
+                        Photography • Visual Arts
+                    </p>
+                    <p class="text-sm justified mb-3">
+                        Visual documentation of travels across nine countries, capturing cultural moments, architectural wonders, and the everyday beauty found in far-flung destinations. Each photograph tells a story of discovery.
+                    </p>
+                    <div class="text-xs text-right italic text-ink-light">
+                        Ongoing Portfolio
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- EDUCATION SECTION -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section class="mb-8 border-b-2 border-ink pb-8">
+            <div class="text-center mb-6">
+                <span class="small-caps text-sm tracking-widest">Section D</span>
+                <h3 class="font-headline text-4xl font-bold">Education & Scholarship</h3>
+                <div class="ornament mt-2"></div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- Degree -->
+                <div class="border-2 border-ink p-6 bg-paper-light">
+                    <div class="flex flex-col md:flex-row items-start gap-6">
+                        <div class="text-6xl text-center md:text-left w-full md:w-auto">🏛️</div>
+                        <div class="flex-1">
+                            <h4 class="font-headline text-2xl font-bold mb-1">
+                                Dedan Kimathi University of Technology
+                            </h4>
+                            <p class="font-accent text-xl italic text-sepia-dark">DeKUT</p>
+                            <p class="text-sm text-ink-light mt-2 small-caps">Nyeri, Kenya • Currently Enrolled</p>
+                            
+                            <div class="mt-4 pt-4 border-t border-ink">
+                                <h5 class="font-headline font-bold mb-2">Academic Focus</h5>
+                                <p class="text-sm justified">
+                                    Pursuing a rigorous course of study that combines technical education with practical application. The university's emphasis on technology and innovation provides an ideal environment for developing both theoretical knowledge and hands-on skills.
+                                </p>
+                            </div>
+                            
+                            <div class="mt-4 pt-4 border-t border-ink">
+                                <h5 class="font-headline font-bold mb-2">Extracurricular Engagement</h5>
+                                <ul class="text-sm space-y-1">
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-sepia-dark">✦</span>
+                                        <span>Active participant in creative and technical clubs</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-sepia-dark">✦</span>
+                                        <span>Balancing academics with artistic pursuits</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-sepia-dark">✦</span>
+                                        <span>Contributing to university community life</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quote about education -->
+                <div class="mt-6 text-center">
+                    <blockquote class="font-accent text-xl italic">
+                        "Education is not the filling of a pail, but the lighting of a fire."
+                    </blockquote>
+                    <p class="text-sm text-ink-light mt-1">— W.B. Yeats</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- RESUME SECTION - OFFICIAL DOCUMENTS -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section class="mb-8 border-b-2 border-ink pb-8">
+            <div class="max-w-2xl mx-auto">
+                <!-- Decorative header -->
+                <div class="border-4 border-double border-ink p-6 text-center bg-paper-light relative">
+                    <!-- Corner ornaments -->
+                    <div class="absolute top-2 left-2 text-sepia-dark text-2xl">❧</div>
+                    <div class="absolute top-2 right-2 text-sepia-dark text-2xl rotate-180">❧</div>
+                    <div class="absolute bottom-2 left-2 text-sepia-dark text-2xl rotate-180">❧</div>
+                    <div class="absolute bottom-2 right-2 text-sepia-dark text-2xl">❧</div>
+                    
+                    <span class="small-caps text-sm tracking-widest">Official Documents</span>
+                    <h3 class="font-headline text-3xl font-bold mt-2">
+                        PUBLIC RECORDS OFFICE
+                    </h3>
+                    <div class="ornament my-4"></div>
+                    
+                    <p class="font-accent text-lg italic mb-4">
+                        Complete Academic & Professional Record Available for Review
+                    </p>
+                    
+                    <p class="text-sm mb-6">
+                        Herein contained is the official curriculum vitae documenting 
+                        academic achievements, skills, experiences, and creative pursuits.
+                    </p>
+                    
+                    <!-- Download button styled as stamp -->
+                    <a href="/resume.pdf" 
+                       download
+                       class="stamp-btn inline-block bg-ink text-paper px-8 py-4 font-headline text-lg tracking-wider border-4 border-ink hover:bg-ink-light transition-colors">
+                        <span class="block text-xs small-caps mb-1">Click to</span>
+                        <span class="block text-xl font-bold">⬇ REQUEST OFFICIAL DOCUMENT</span>
+                    </a>
+                    
+                    <!-- File info -->
+                    <p class="text-xs text-ink-light mt-4 italic">
+                        Format: PDF Document • Last Updated: January 1926
+                    </p>
+                </div>
+                
+                <!-- Alternative classified ad style -->
+                <div class="mt-6 border-2 border-ink p-4 bg-paper text-center">
+                    <p class="font-headline font-bold text-lg">
+                        ✉ CURRICULUM VITAE AVAILABLE ✉
+                    </p>
+                    <p class="text-sm italic mt-1">
+                        Request Your Copy Today! Complete Academic & Professional Record. 
+                        References Available Upon Request.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- CLASSIFIEDS - CONTACT & SOCIAL -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section class="mb-8">
+            <div class="text-center mb-6">
+                <span class="small-caps text-sm tracking-widest">Section E</span>
+                <h3 class="font-headline text-4xl font-bold">Classifieds & Notices</h3>
+                <div class="ornament mt-2"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-4">
+                <!-- Contact Info -->
+                <div class="vintage-ad p-4">
+                    <h4 class="font-headline text-center text-xl font-bold mb-3">
+                        ★ FOR INQUIRIES ★
+                    </h4>
+                    <div class="text-sm space-y-2 text-center">
+                        <p>
+                            <span class="small-caps">Electronic Mail:</span><br>
+                            <a href="mailto:flavia@example.com" class="underline hover:no-underline">
+                                flavia@example.com
+                            </a>
+                        </p>
+                        <p>
+                            <span class="small-caps">Correspondence:</span><br>
+                            Nairobi, Kenya
+                        </p>
+                        <p>
+                            <span class="small-caps">University:</span><br>
+                            DeKUT, Nyeri
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="vintage-ad p-4">
+                    <h4 class="font-headline text-center text-xl font-bold mb-3">
+                        ★ CONNECTIONS ★
+                    </h4>
+                    <div class="space-y-2">
+                        <a href="https://github.com" 
+                           target="_blank"
+                           class="block text-center p-2 border border-ink hover:bg-ink hover:text-paper transition-colors">
+                            <span class="font-bold">GitHub</span>
+                            <span class="text-xs block">View Code & Projects</span>
+                        </a>
+                        <a href="https://linkedin.com" 
+                           target="_blank"
+                           class="block text-center p-2 border border-ink hover:bg-ink hover:text-paper transition-colors">
+                            <span class="font-bold">LinkedIn</span>
+                            <span class="text-xs block">Professional Network</span>
+                        </a>
+                        <a href="https://instagram.com" 
+                           target="_blank"
+                           class="block text-center p-2 border border-ink hover:bg-ink hover:text-paper transition-colors">
+                            <span class="font-bold">Instagram</span>
+                            <span class="text-xs block">Creative Portfolio</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Personal Notice -->
+                <div class="vintage-ad p-4 bg-paper-dark">
+                    <h4 class="font-headline text-center text-xl font-bold mb-3">
+                        ★ PUBLIC NOTICE ★
+                    </h4>
+                    <p class="text-center text-sm font-accent italic mb-3">
+                        "SEEKING COLLABORATIONS"
+                    </p>
+                    <p class="text-sm text-center justified">
+                        Creative and curious student seeks opportunities for collaboration, learning, and growth. Open to connecting with fellow artists, technologists, readers, and travelers. 
+                    </p>
+                    <p class="text-center mt-3 font-bold text-lg">
+                        ✦ LET'S CONNECT ✦
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Travel Notice -->
+            <div class="mt-6 border border-ink p-4 text-center bg-paper-light">
+                <p class="font-headline font-bold text-lg mb-2">
+                    🌍 TRAVEL ADVISORY 🌍
+                </p>
+                <p class="text-sm">
+                    <strong>Countries Visited:</strong> 9 Nations Across Multiple Continents
+                </p>
+                <p class="text-xs italic mt-1 text-ink-light">
+                    "The world is a book, and those who do not travel read only one page." — Saint Augustine
+                </p>
+            </div>
+        </section>
+        
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- FOOTER -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <footer class="border-t-4 border-double border-ink pt-6 mt-8">
+            <div class="text-center">
+                <p class="font-blackletter text-3xl mb-2">The Flavia Gazette</p>
+                <p class="text-sm small-caps mb-4">
+                    Published with Curiosity and Care
+                </p>
+                
+                <div class="flex flex-wrap justify-center items-center gap-2 md:gap-4 text-xs text-ink-light mb-4">
+                    <span>© 2026 Amanda Flavia Ahona</span>
+                    <span class="hidden md:inline">•</span>
+                    <span>Crafted with HTML & Tailwind CSS</span>
+                    <span class="hidden md:inline">•</span>
+                    <span>Nairobi, Kenya</span>
+                </div>
+                
+                <p class="flourish text-sm italic font-accent">
+                    "Stay curious, keep creating, never stop exploring."
+                </p>
+                
+                <!-- Back to top -->
+                <a href="#" 
+                   class="inline-block mt-6 text-sm border border-ink px-4 py-2 hover:bg-ink hover:text-paper transition-colors">
+                    ↑ Return to Masthead
+                </a>
+            </div>
+            
+            <!-- Very bottom bar -->
+            <div class="mt-6 pt-4 border-t border-ink text-center text-xs text-ink-light">
+                <p>
+                    Weather in Nairobi: ☀️ Sunny with Inspiration • 
+                    Books Read This Year: Countless • 
+                    Violin Practice: Daily
+                </p>
+            </div>
+        </footer>
+        
+    </div>
+    
+    <!-- JavaScript for dynamic date -->
+    <script>
+        // Set current date in newspaper format
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        };
+        const today = new Date();
+        const formattedDate = today.toLocaleDateString('en-US', options);
+        document.getElementById('current-date').textContent = formattedDate.toUpperCase();
+        
+        // Add smooth scroll behavior for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                } else {
+                    // Scroll to top if no target
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add subtle parallax to coffee stains
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.coffee-stain').forEach((stain, index) => {
+                const speed = 0.1 + (index * 0.05);
+                stain.style.transform = `translateY(${scrolled * speed}px) rotate(${45 * index}deg)`;
+            });
+        });
+    </script>
+</body>
+</html>
