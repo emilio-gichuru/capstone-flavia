@@ -1,309 +1,466 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amanda Flavia Ahona - Portfolio</title>
-    
-    <!-- Tailwind CSS -->
+    <title>Amanda Flavia Ahona - Capstone Portfolio</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <script>
+        const LINKS = {
+            // Resume
+            resume: 'https://drive.google.com/file/d/1oIJP6631BeYpHb0DS6cttijS7yYNCuuu/view?usp=sharing',
+
+            // Autobiographical Essay
+            autobiographyEssay: 'https://drive.google.com/file/d/1af47NzQRuFLUqjC61IrqhBtshCa8s3B0/view?usp=sharing',
+
+            // Autobiography Presentation
+            autobiographyPresentation: 'https://drive.google.com/file/d/1uZloE32TqAVwzBwvw9VGbragT7sbfwQQ/view?usp=sharing',
+
+            // Innovation
+            innovationVideo: 'https://drive.google.com/file/d/1_XJb_epb15bqegUVeuPfcjvEmUXGMooH/view?usp=sharing',
+            innovationPresentation: 'https://docs.google.com/presentation/d/1E8OaxLtFw25PcygeeedjF5_thspR7ZtG/edit?usp=sharing&ouid=116450602328740158740&rtpof=true&sd=true',
+            innovationAbstract: 'https://docs.google.com/document/d/1vXKsuVoQeJQWAFdnkAXbQBqW8vJCiEni/edit?usp=sharing&ouid=116450602328740158740&rtpof=true&sd=true',
+
+            // African Culture
+            africanCultureVideo: 'https://drive.google.com/file/d/1sMNbcXRWXl1ow9WbJuPIi9EVCcypLomx/view?usp=sharing',  // Add video link here when available
+            africanCulturePresentation: 'https://docs.google.com/presentation/d/1XI9bgwS0zGRYdBF7WW0m5xG3LpTRx_gP/edit?usp=sharing&ouid=116450602328740158740&rtpof=true&sd=true',
+            africanCultureAbstract: 'https://docs.google.com/document/d/1_XWhHet68o3Pc05rrHXeYUceN0zJYKN0/edit?usp=sharing&ouid=116450602328740158740&rtpof=true&sd=true',
+
+            // Societal Challenge / Economic
+            societalVideo: 'https://drive.google.com/file/d/1LG4DWBtp4D8UkUCHuTU49UZ92djzl86w/view?usp=sharing',  // Add video link here when available
+            societalPresentation: 'https://docs.google.com/presentation/d/1NraLZTCx2l494QGmF0YFlBv2v7iJ38tP/edit?usp=sharing&ouid=116450602328740158740&rtpof=true&sd=true',
+            societalAbstract: 'https://docs.google.com/document/d/17F2kVRb-5x5oADZYQvsPGbSoUuST3Ip9/edit?usp=sharing&ouid=116450602328740158740&rtpof=true&sd=true',
+
+            // Photographic Essay
+            photographicEssay: 'https://drive.google.com/file/d/1AyhX2dvDog1MUJvzHd3JPL_9AX4HwnfK/view?usp=sharing',
+
+            // Social Media
+            linkedin: 'https://www.linkedin.com/in/amanda-flavia-9297aa242',
+            instagram: 'https://www.instagram.com/fauxflavia?utm_source=qr&igsh=MW1tbDM3N2E4ZnpkNg==',
+            twitter: 'https://x.com/amandaf333',
+            tiktok: 'https://www.tiktok.com/@fauxflavia?_r=1&_t=ZM-92SwaBVwnVo',
+            github: 'https://github.com/Sort0fFun',
+
+        };
+
+        // Apply links after page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('[data-link]').forEach(el => {
+                const key = el.getAttribute('data-link');
+                if (LINKS[key]) {
+                    el.href = LINKS[key];
+                }
+            });
+        });
+
         tailwind.config = {
             theme: {
                 extend: {
+                    colors: {
+                        'cream': '#FFF5F8',
+                        'sand': '#FFE4EC',
+                        'terracotta': '#800020',
+                        'rust': '#722F37',
+                        'sienna': '#8E4585',
+                        'amber': '#FFC0CB',
+                        'cocoa': '#4A2040',
+                        'espresso': '#3D1A2E',
+                    },
                     fontFamily: {
-                        'sans': ['Inter', 'sans-serif'],
-                        'serif': ['Playfair Display', 'serif'],
+                        'display': ['DM Serif Display', 'serif'],
+                        'body': ['Inter', 'sans-serif'],
                     },
                 }
             }
         }
     </script>
-    
+
     <style>
         html {
             scroll-behavior: smooth;
         }
+
+        .warm-gradient {
+            background: linear-gradient(135deg, #800020 0%, #722F37 50%, #8E4585 100%);
+        }
+
+        .card-warm {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 4px 20px rgba(196, 92, 62, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-warm:hover {
+            box-shadow: 0 20px 40px rgba(128, 0, 32, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .btn-warm {
+            background: linear-gradient(135deg, #800020 0%, #8E4585 100%);
+            box-shadow: 0 4px 15px rgba(128, 0, 32, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-warm:hover {
+            box-shadow: 0 8px 25px rgba(128, 0, 32, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .accent-line {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #800020, #FFC0CB);
+            border-radius: 2px;
+        }
+
+        .video-warm {
+            background: linear-gradient(135deg, #3D1A2E 0%, #4A2040 100%);
+            border: 1px solid rgba(255, 192, 203, 0.2);
+        }
+
+        .tag {
+            background: linear-gradient(135deg, rgba(128, 0, 32, 0.1) 0%, rgba(255, 192, 203, 0.1) 100%);
+            border: 1px solid rgba(128, 0, 32, 0.2);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #800020;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .social-card {
+            background: linear-gradient(135deg, #FDF8F3 0%, #F5E6D3 100%);
+            border: 1px solid rgba(196, 92, 62, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-card:hover {
+            background: linear-gradient(135deg, #800020 0%, #8E4585 100%);
+            border-color: transparent;
+        }
+
+        .social-card:hover svg,
+        .social-card:hover span {
+            color: white !important;
+        }
     </style>
 </head>
-<body class="bg-white text-gray-900 font-sans">
-    
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm border-b border-gray-100 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <a href="#" class="font-serif text-xl font-semibold">Flavia</a>
-                <div class="hidden md:flex gap-8 text-sm">
-                    <a href="#about" class="hover:text-gray-600 transition-colors">About</a>
-                    <a href="#skills" class="hover:text-gray-600 transition-colors">Skills</a>
-                    <a href="#projects" class="hover:text-gray-600 transition-colors">Projects</a>
-                    <a href="#education" class="hover:text-gray-600 transition-colors">Education</a>
-                    <a href="#contact" class="hover:text-gray-600 transition-colors">Contact</a>
+
+<body class="bg-cream font-body text-cocoa">
+
+    <!-- Hero Header -->
+    <header class="warm-gradient min-h-[60vh] relative overflow-hidden">
+        <!-- Decorative circles -->
+        <div class="absolute top-10 right-10 w-64 h-64 rounded-full border border-white/10"></div>
+        <div class="absolute bottom-20 left-10 w-40 h-40 rounded-full border border-white/10"></div>
+        <div
+            class="absolute top-1/2 left-1/2 w-96 h-96 rounded-full border border-white/5 -translate-x-1/2 -translate-y-1/2">
+        </div>
+
+        <!-- Content -->
+        <div class="max-w-6xl mx-auto px-8 pt-32 pb-20 relative z-10">
+            <div class="text-center">
+                <div
+                    class="inline-block px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white/80 text-sm mb-8">
+                    Capstone Project Portfolio • 2026
                 </div>
-                <a href="/resume.pdf" download class="bg-gray-900 text-white px-4 py-2 text-sm rounded hover:bg-gray-700 transition-colors">
-                    Resume
-                </a>
+                <h1 class="font-display text-6xl md:text-8xl text-white mb-6">
+                    Amanda Flavia Ahona
+                </h1>
+                <p class="text-white/70 font-mono text-lg mb-4">C025-01-2768/2021</p>
+                <p class="text-amber text-sm">Dedan Kimathi University of Technology</p>
+            </div>
+        </div>
+
+        <!-- Wave bottom -->
+        <div class="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+                    fill="#FFF5F8" />
+            </svg>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-cream/95 backdrop-blur-md border-b border-sand py-5">
+        <div class="max-w-6xl mx-auto px-8">
+            <div class="flex flex-wrap gap-8 justify-center text-sm font-medium">
+                <a href="#resume" class="nav-link text-sienna hover:text-terracotta">Resume</a>
+                <a href="#essay" class="nav-link text-sienna hover:text-terracotta">Essay</a>
+                <a href="#autobiography" class="nav-link text-sienna hover:text-terracotta">Autobiography</a>
+                <a href="#innovation" class="nav-link text-sienna hover:text-terracotta">Innovation</a>
+                <a href="#african-culture" class="nav-link text-sienna hover:text-terracotta">African Culture</a>
+                <a href="#societal" class="nav-link text-sienna hover:text-terracotta">Societal Challenge</a>
+                <a href="#photo-essay" class="nav-link text-sienna hover:text-terracotta">Photo Essay</a>
+                <a href="#online" class="nav-link text-sienna hover:text-terracotta">Online Presence</a>
             </div>
         </div>
     </nav>
-    
-    <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center pt-16">
-        <div class="max-w-6xl mx-auto px-4 py-20 text-center">
-            <p class="text-gray-500 mb-4">Hello, I'm</p>
-            <h1 class="font-serif text-5xl md:text-7xl font-bold mb-6">
-                Amanda Flavia Ahona
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                Student at DeKUT • Creative • Curious Explorer
-            </p>
-            <p class="text-gray-500 mb-8">Based in Nairobi, Kenya</p>
-            <div class="flex gap-4 justify-center">
-                <a href="#contact" class="bg-gray-900 text-white px-6 py-3 rounded hover:bg-gray-700 transition-colors">
-                    Get in Touch
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-8 py-20 space-y-16">
+
+        <!-- Resume -->
+        <section id="resume" class="card-warm p-10">
+            <div class="accent-line mb-6"></div>
+            <h2 class="font-display text-4xl text-cocoa mb-3">Resume</h2>
+            <p class="text-sienna/70 mb-8">Available in three languages</p>
+            <a href="#" data-link="resume" target="_blank"
+                class="btn-warm inline-flex items-center gap-3 text-white px-8 py-4 rounded-2xl font-medium">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                    </path>
+                </svg>
+                View Resume
+            </a>
+        </section>
+
+        <!-- Autobiographical Essay -->
+        <section id="essay" class="card-warm p-10">
+            <div class="accent-line mb-6"></div>
+            <h2 class="font-display text-4xl text-cocoa mb-3">Autobiographical Essay</h2>
+            <p class="text-sienna/70 mb-8">A personal narrative of my journey and experiences</p>
+            <a href="#" data-link="autobiographyEssay" target="_blank"
+                class="btn-warm inline-flex items-center gap-3 text-white px-8 py-4 rounded-2xl font-medium">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                    </path>
+                </svg>
+                Download Essay
+            </a>
+        </section>
+
+        <!-- Autobiography Presentation -->
+        <section id="autobiography" class="card-warm p-10">
+            <div class="accent-line mb-6"></div>
+            <h2 class="font-display text-4xl text-cocoa mb-3">Autobiography Presentation</h2>
+            <p class="text-sienna/70 mb-8">Visual storytelling of my life journey</p>
+            <a href="#" data-link="autobiographyPresentation" target="_blank"
+                class="btn-warm inline-flex items-center gap-3 text-white px-8 py-4 rounded-2xl font-medium">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
+                    </path>
+                </svg>
+                View Presentation
+            </a>
+        </section>
+
+        <!-- Innovation -->
+        <section id="innovation" class="card-warm p-10">
+            <div class="accent-line mb-6"></div>
+            <h2 class="font-display text-4xl text-cocoa mb-3">The Innovation of Ride-Hailing</h2>
+            <p class="text-sienna/70 mb-8">20-minute video presentation on Ride-Hailing technology</p>
+
+            <!-- Video Player -->
+            <a href="#" data-link="innovationVideo" target="_blank"
+                class="video-warm rounded-3xl aspect-video mb-8 flex items-center justify-center overflow-hidden block">
+                <div class="text-center">
+                    <div
+                        class="w-24 h-24 rounded-full bg-gradient-to-br from-terracotta to-sienna flex items-center justify-center mx-auto mb-4 cursor-pointer hover:scale-110 transition-transform shadow-lg shadow-terracotta/30">
+                        <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </div>
+                    <p class="text-amber/60 text-sm">Click to play video</p>
+                </div>
+            </a>
+
+            <div class="flex flex-wrap items-center gap-4">
+                <a href="#" data-link="innovationPresentation" target="_blank"
+                    class="btn-warm inline-flex items-center gap-2 text-white px-6 py-3 rounded-xl font-medium">
+                    View Presentation
                 </a>
-                <a href="#projects" class="border border-gray-300 px-6 py-3 rounded hover:border-gray-900 transition-colors">
-                    View Projects
-                </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="font-serif text-3xl md:text-4xl font-bold mb-12 text-center">About Me</h2>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <p class="text-gray-600 mb-4 leading-relaxed">
-                        I'm Amanda Flavia Ahona, but most people call me Flavia. I'm a student at Dedan Kimathi University of Technology (DeKUT) with a passion for both technology and the arts.
-                    </p>
-                    <p class="text-gray-600 mb-4 leading-relaxed">
-                        I believe in living a multifaceted life—whether it's crafting jewelry from metal, practicing violin, diving into Russian literature, or exploring new countries. I've visited 9 countries so far, and each journey has taught me something new.
-                    </p>
-                    <p class="text-gray-600 leading-relaxed">
-                        Currently reading "The Glass Bees" by Ernst Jünger and always on the lookout for a good Paul Thomas Anderson film.
-                    </p>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <p class="text-3xl font-bold text-gray-900">9</p>
-                        <p class="text-gray-500 text-sm">Countries Visited</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <p class="text-3xl font-bold text-gray-900">DeKUT</p>
-                        <p class="text-gray-500 text-sm">University</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <p class="text-3xl font-bold text-gray-900">🎻</p>
-                        <p class="text-gray-500 text-sm">Violinist</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <p class="text-3xl font-bold text-gray-900">💎</p>
-                        <p class="text-gray-500 text-sm">Jewelry Maker</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Skills & Interests Section -->
-    <section id="skills" class="py-20">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="font-serif text-3xl md:text-4xl font-bold mb-12 text-center">Skills & Interests</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                
-                <div class="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
-                    <div class="text-3xl mb-4">💎</div>
-                    <h3 class="font-semibold text-lg mb-2">Jewelry & Metalwork</h3>
-                    <p class="text-gray-600 text-sm">
-                        Creating handcrafted jewelry pieces using traditional metalworking techniques combined with contemporary design.
-                    </p>
-                </div>
-                
-                <div class="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
-                    <div class="text-3xl mb-4">🎻</div>
-                    <h3 class="font-semibold text-lg mb-2">Violin</h3>
-                    <p class="text-gray-600 text-sm">
-                        Dedicated to the art of violin, exploring both classical pieces and new musical territories through regular practice.
-                    </p>
-                </div>
-                
-                <div class="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
-                    <div class="text-3xl mb-4">📚</div>
-                    <h3 class="font-semibold text-lg mb-2">Literature</h3>
-                    <p class="text-gray-600 text-sm">
-                        Avid reader with a love for Russian literature. Currently reading Ernst Jünger's "The Glass Bees."
-                    </p>
-                </div>
-                
-                <div class="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
-                    <div class="text-3xl mb-4">🎬</div>
-                    <h3 class="font-semibold text-lg mb-2">Film & Photography</h3>
-                    <p class="text-gray-600 text-sm">
-                        Film enthusiast with appreciation for directors like Paul Thomas Anderson. Also passionate about photography.
-                    </p>
-                </div>
-                
-                <div class="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
-                    <div class="text-3xl mb-4">🌍</div>
-                    <h3 class="font-semibold text-lg mb-2">Travel</h3>
-                    <p class="text-gray-600 text-sm">
-                        Explored 9 countries across multiple continents. Every journey is an opportunity to learn and grow.
-                    </p>
-                </div>
-                
-                <div class="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
-                    <div class="text-3xl mb-4">🎯</div>
-                    <h3 class="font-semibold text-lg mb-2">Shooting Sports</h3>
-                    <p class="text-gray-600 text-sm">
-                        Precision and focus through shooting sports, requiring concentration and steady nerves.
-                    </p>
-                </div>
-                
-            </div>
-        </div>
-    </section>
-    
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="font-serif text-3xl md:text-4xl font-bold mb-12 text-center">Projects</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                
-                <!-- Capstone Project -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
-                    <div class="bg-gray-100 h-48 flex items-center justify-center">
-                        <span class="text-5xl">🎓</span>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-xs text-gray-500 uppercase tracking-wide">Academic</span>
-                        <h3 class="font-semibold text-xl mt-2 mb-3">Capstone Project</h3>
-                        <p class="text-gray-600 text-sm mb-4">
-                            University capstone project demonstrating technical knowledge, creative problem-solving, and practical application of skills learned at DeKUT.
-                        </p>
-                        <div class="flex gap-2">
-                            <a href="#" class="text-sm text-gray-900 hover:underline">View Project →</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Jewelry Collection -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
-                    <div class="bg-gray-100 h-48 flex items-center justify-center">
-                        <span class="text-5xl">💍</span>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-xs text-gray-500 uppercase tracking-wide">Creative</span>
-                        <h3 class="font-semibold text-xl mt-2 mb-3">Jewelry Collection</h3>
-                        <p class="text-gray-600 text-sm mb-4">
-                            Handcrafted metalwork jewelry pieces combining traditional techniques with contemporary aesthetics.
-                        </p>
-                        <div class="flex gap-2">
-                            <a href="#" class="text-sm text-gray-900 hover:underline">View Collection →</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Travel Photography -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
-                    <div class="bg-gray-100 h-48 flex items-center justify-center">
-                        <span class="text-5xl">📷</span>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-xs text-gray-500 uppercase tracking-wide">Photography</span>
-                        <h3 class="font-semibold text-xl mt-2 mb-3">Travel Photography</h3>
-                        <p class="text-gray-600 text-sm mb-4">
-                            Visual documentation of travels across 9 countries, capturing cultural moments and everyday beauty.
-                        </p>
-                        <div class="flex gap-2">
-                            <a href="#" class="text-sm text-gray-900 hover:underline">View Gallery →</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- More Projects -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow border-2 border-dashed border-gray-200">
-                    <div class="h-full flex items-center justify-center p-6 min-h-[300px]">
-                        <div class="text-center">
-                            <span class="text-4xl mb-4 block">✨</span>
-                            <h3 class="font-semibold text-lg mb-2">More Coming Soon</h3>
-                            <p class="text-gray-500 text-sm">Stay tuned for upcoming projects</p>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </section>
-    
-    <!-- Education Section -->
-    <section id="education" class="py-20">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="font-serif text-3xl md:text-4xl font-bold mb-12 text-center">Education</h2>
-            <div class="max-w-2xl mx-auto">
-                <div class="border-l-2 border-gray-900 pl-8 relative">
-                    <div class="absolute w-4 h-4 bg-gray-900 rounded-full -left-[9px] top-0"></div>
-                    <div class="mb-8">
-                        <p class="text-sm text-gray-500 mb-1">Currently Enrolled</p>
-                        <h3 class="font-semibold text-xl mb-2">Dedan Kimathi University of Technology</h3>
-                        <p class="text-gray-600 mb-2">DeKUT • Nyeri, Kenya</p>
-                        <p class="text-gray-600 text-sm">
-                            Pursuing studies that combine technical education with practical application in a technology-focused environment.
-                        </p>
-                    </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <span class="text-sienna/50 text-sm">Abstract:</span>
+                    <a href="#" data-link="innovationAbstract" target="_blank"
+                        class="text-terracotta font-medium text-sm hover:underline">View Abstract</a>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-900 text-white">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <h2 class="font-serif text-3xl md:text-4xl font-bold mb-6">Let's Connect</h2>
-            <p class="text-gray-400 mb-8 max-w-xl mx-auto">
-                I'm always open to new opportunities, collaborations, and conversations. Feel free to reach out!
-            </p>
-            
-            <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <a href="mailto:flavia@example.com" class="bg-white text-gray-900 px-6 py-3 rounded hover:bg-gray-100 transition-colors">
-                    Email Me
+        </section>
+
+        <!-- African Culture -->
+        <section id="african-culture" class="card-warm p-10">
+            <div class="accent-line mb-6"></div>
+            <h2 class="font-display text-4xl text-cocoa mb-3">An Aspect of African culture demonstrating its importance
+                to IT</h2>
+            <p class="text-sienna/70 mb-8"></p>
+
+            <!-- Video Player -->
+            <a href="#" data-link="africanCultureVideo" target="_blank"
+                class="video-warm rounded-3xl aspect-video mb-8 flex items-center justify-center overflow-hidden block">
+                <div class="text-center">
+                    <div
+                        class="w-24 h-24 rounded-full bg-gradient-to-br from-terracotta to-sienna flex items-center justify-center mx-auto mb-4 cursor-pointer hover:scale-110 transition-transform shadow-lg shadow-terracotta/30">
+                        <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </div>
+                    <p class="text-amber/60 text-sm">Click to play video</p>
+                </div>
+            </a>
+
+            <div class="flex flex-wrap items-center gap-4">
+                <a href="#" data-link="africanCulturePresentation" target="_blank"
+                    class="btn-warm inline-flex items-center gap-2 text-white px-6 py-3 rounded-xl font-medium">
+                    View Presentation
                 </a>
-                <a href="/resume.pdf" download class="border border-white px-6 py-3 rounded hover:bg-white hover:text-gray-900 transition-colors">
-                    Download Resume
+                <div class="flex flex-wrap items-center gap-3">
+                    <span class="text-sienna/50 text-sm">Abstract:</span>
+                    <a href="#" data-link="africanCultureAbstract" target="_blank"
+                        class="text-terracotta font-medium text-sm hover:underline">View Abstract</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Societal Challenge -->
+        <section id="societal" class="card-warm p-10">
+            <div class="accent-line mb-6"></div>
+            <h2 class="font-display text-4xl text-cocoa mb-3">Societal Challenge</h2>
+            <p class="text-sienna/70 mb-8">Video presentation addressing a modern societal challenge</p>
+
+            <!-- Video Player -->
+            <a href="#" data-link="societalVideo" target="_blank"
+                class="video-warm rounded-3xl aspect-video mb-8 flex items-center justify-center overflow-hidden block">
+                <div class="text-center">
+                    <div
+                        class="w-24 h-24 rounded-full bg-gradient-to-br from-terracotta to-sienna flex items-center justify-center mx-auto mb-4 cursor-pointer hover:scale-110 transition-transform shadow-lg shadow-terracotta/30">
+                        <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </div>
+                    <p class="text-amber/60 text-sm">Click to play video</p>
+                </div>
+            </a>
+
+            <div class="flex flex-wrap items-center gap-4">
+                <a href="#" data-link="societalPresentation" target="_blank"
+                    class="btn-warm inline-flex items-center gap-2 text-white px-6 py-3 rounded-xl font-medium">
+                    View Presentation
+                </a>
+                <div class="flex flex-wrap items-center gap-3">
+                    <span class="text-sienna/50 text-sm">Abstract:</span>
+                    <a href="#" data-link="societalAbstract" target="_blank"
+                        class="text-terracotta font-medium text-sm hover:underline">View Abstract</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photographic Essay -->
+        <section id="photo-essay" class="card-warm p-10">
+            <div class="accent-line mb-6"></div>
+            <h2 class="font-display text-4xl text-cocoa mb-3">Photographic Essay</h2>
+            <p class="text-sienna/70 mb-8">Visual storytelling through the art of photography</p>
+            <a href="#" data-link="photographicEssay" target="_blank"
+                class="btn-warm inline-flex items-center gap-3 text-white px-8 py-4 rounded-2xl font-medium">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                    </path>
+                </svg>
+                View Photo Gallery
+            </a>
+        </section>
+
+        <!-- Online Presence -->
+        <section id="online" class="card-warm p-10">
+            <div class="accent-line mb-6"></div>
+            <h2 class="font-display text-4xl text-cocoa mb-3">Online Presence</h2>
+            <p class="text-sienna/70 mb-10">Find me across these professional platforms</p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
+                <a href="#" data-link="linkedin" target="_blank"
+                    class="social-card flex flex-col items-center p-5 rounded-2xl">
+                    <svg class="w-7 h-7 text-terracotta mb-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                    </svg>
+                    <span class="text-sm text-sienna font-medium">LinkedIn</span>
+                </a>
+
+                <a href="#" data-link="github" target="_blank"
+                    class="social-card flex flex-col items-center p-5 rounded-2xl">
+                    <svg class="w-7 h-7 text-terracotta mb-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                    <span class="text-sm text-sienna font-medium">GitHub</span>
+                </a>
+
+                <a href="#" data-link="instagram" target="_blank"
+                    class="social-card flex flex-col items-center p-5 rounded-2xl">
+                    <svg class="w-7 h-7 text-terracotta mb-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
+                    <span class="text-sm text-sienna font-medium">Instagram</span>
+                </a>
+
+                <a href="#" data-link="twitter" target="_blank"
+                    class="social-card flex flex-col items-center p-5 rounded-2xl">
+                    <svg class="w-7 h-7 text-terracotta mb-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg>
+                    <span class="text-sm text-sienna font-medium">Twitter/X</span>
+                </a>
+
+                <a href="#" data-link="tiktok" target="_blank"
+                    class="social-card flex flex-col items-center p-5 rounded-2xl">
+                    <svg class="w-7 h-7 text-terracotta mb-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
+                    </svg>
+                    <span class="text-sm text-sienna font-medium">TikTok</span>
                 </a>
             </div>
-            
-            <!-- Social Links -->
-            <div class="flex justify-center gap-6">
-                <a href="#" target="_blank" class="text-gray-400 hover:text-white transition-colors">
-                    <span class="sr-only">GitHub</span>
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                </a>
-                <a href="#" target="_blank" class="text-gray-400 hover:text-white transition-colors">
-                    <span class="sr-only">LinkedIn</span>
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                </a>
-                <a href="#" target="_blank" class="text-gray-400 hover:text-white transition-colors">
-                    <span class="sr-only">Instagram</span>
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                </a>
-            </div>
-        </div>
-    </section>
-    
+        </section>
+
+    </main>
+
     <!-- Footer -->
-    <footer class="py-6 border-t border-gray-100">
-        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
-            <p>© 2026 Amanda Flavia Ahona. All rights reserved.</p>
+    <footer class="bg-espresso text-white py-20 relative overflow-hidden">
+        <!-- Decorative -->
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-terracotta via-amber to-terracotta"></div>
+
+        <div class="max-w-4xl mx-auto px-8 text-center relative z-10">
+            <h3 class="font-display text-4xl mb-3">Amanda Flavia Ahona</h3>
+            <p class="text-amber/70 mb-2">Dedan Kimathi University of Technology</p>
+            <p class="text-amber/50 text-sm mb-8">Institute of General Studies</p>
+
+            <div class="w-20 h-0.5 bg-gradient-to-r from-transparent via-amber to-transparent mx-auto mb-8"></div>
+
+            <p class="text-amber/30 text-sm">© 2026 Capstone Portfolio. All rights reserved.</p>
         </div>
     </footer>
-    
+
 </body>
+
 </html>
